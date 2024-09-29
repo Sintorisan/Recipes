@@ -1,0 +1,23 @@
+﻿@page "/"
+@using Recipes.Services
+@inject HomeLogic logic
+
+<h3>Input Processor</h3>
+
+<p>Enter some text below and see it processed:</p>
+
+<input @bind="logic.UserInput" placeholder="Enter text here" />
+<button @onclick="logic.ProcessInput">Process Input</button>
+
+@if (logic.ProcessedOutput != null)
+{
+    <p><strong>Processed Output:</strong> @logic.ProcessedOutput.Name</p>
+}
+else
+{
+    <p><strong>Processed Output:</strong> No output yet.</p>
+}
+
+@code {
+    // No need to add anything here since HomeLogic handles the logic
+}

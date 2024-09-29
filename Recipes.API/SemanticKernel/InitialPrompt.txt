@@ -1,0 +1,114 @@
+﻿- **Extract the following information from the HTML body of a recipe:**
+  - **name**: The name of the recipe.
+  - **time**: An object containing:
+    - **prep**: The preparation time.
+    - **cook**: The cooking time.
+    - **total**: The total time required.
+  - **steps**: An array of objects for each step with:
+    - **how_to**: The instructions for that step.
+    - **time**: The time required for that step.
+    - **ingredients**: An array of objects for each ingredient used in that step, containing:
+      - **item**: The ingredient's name.
+      - **measurement**: An object with:
+        - **value**: The quantity of the ingredient.
+        - **unit**: The unit of measurement (e.g., PORTION, STYCK, MSK, DL, G, KRM).
+
+- **Output Format:**
+
+```json
+{
+  "name": "Palak Paneer med Tomat och Halloumi",
+  "time": {
+    "prep": "20 min",
+    "cook": "30 min",
+    "total": "50 min"
+  },
+  "steps": [
+    {
+      "how_to": "Koka riset enligt anvisningen på förpackningen.",
+      "time": "20 min",
+      "ingredients": [
+        {
+          "item": "Ris eller havreris",
+          "measurement": {
+            "value": 4,
+            "unit": "PORTION"
+          }
+        }
+      ]
+    },
+    {
+      "how_to": "Fräs lök, vitlök, ingefära, tomatpuré och garam masala i olivolja.",
+      "time": "10 min",
+      "ingredients": [
+        {
+          "item": "Gul lök eller schalottenlök",
+          "measurement": {
+            "value": 1,
+            "unit": "STYCK"
+          }
+        },
+        {
+          "item": "Vitlöksklyftor",
+          "measurement": {
+            "value": 2,
+            "unit": "STYCK"
+          }
+        }
+      ]
+    },
+    {
+      "how_to": "Tillsätt tomater, krossade tomater, vatten, grädde och buljongtärning. Låt sjuda.",
+      "time": "10 min",
+      "ingredients": [
+        {
+          "item": "Tomater",
+          "measurement": {
+            "value": 2,
+            "unit": "STYCK"
+          }
+        },
+        {
+          "item": "Krossade tomater",
+          "measurement": {
+            "value": 390,
+            "unit": "G"
+          }
+        }
+      ]
+    },
+    {
+      "how_to": "Vänd ner spenaten.",
+      "time": "5 min",
+      "ingredients": [
+        {
+          "item": "Färsk spenat",
+          "measurement": {
+            "value": 200,
+            "unit": "G"
+          }
+        }
+      ]
+    },
+    {
+      "how_to": "Stek halloumi och blanda ner i grytan. Smaka av med salt.",
+      "time": "5 min",
+      "ingredients": [
+        {
+          "item": "Halloumi eller grillost",
+          "measurement": {
+            "value": 400,
+            "unit": "G"
+          }
+        },
+        {
+          "item": "Salt",
+          "measurement": {
+            "value": 2,
+            "unit": "KRM"
+          }
+        }
+      ]
+    }
+  ]
+}

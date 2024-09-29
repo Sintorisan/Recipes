@@ -1,0 +1,6 @@
+@Recipes.API_HostAddress = http://localhost:5172
+
+GET {{Recipes.API_HostAddress}}
+Accept: application/json
+
+###
