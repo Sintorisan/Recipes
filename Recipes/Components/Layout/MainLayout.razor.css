@@ -6,7 +6,15 @@
 
 main {
     flex: 1;
+    display: flex;
+    align-items:center;
+    justify-content:center;
 }
+
+.page article {
+    padding-bottom: 70px; /* Adjust based on the height of the NavBar */
+}
+
 
 .sidebar {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);

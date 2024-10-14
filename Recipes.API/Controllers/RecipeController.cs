@@ -8,22 +8,40 @@ namespace Recipes.API.Controllers
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private readonly ISemanticKernelService _semanticKernelService;
-        private readonly IHtmlService _htmlService;
+        private readonly IRecipeService _recipeService;
 
-        public RecipeController(ISemanticKernelService semanticKernelService, IHtmlService htmlService)
+        public RecipeController(IRecipeService recipeService)
         {
-            _semanticKernelService = semanticKernelService;
-            _htmlService = htmlService;
+            _recipeService = recipeService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Recipe>> AddRecipe([FromBody] string url)
+        public async Task<ActionResult<Recipe?>> AddRecipe([FromBody] string url)
         {
-            var html = await _htmlService.GetHtmlFromUrl(url);
-            var result = await _semanticKernelService.CreateRecipe(html);
+            var recipe = await _recipeService.CreateAndAddRecipe(url);
 
-            return Ok(result);
+            if (recipe == null)
+            {
+                return BadRequest("Recipe could not be created.");
+            }
+
+            return Ok(recipe);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Recipe>>> GetAllRecipes()
+        {
+            var request = await _recipeService.GetAllRecipesAsync();
+
+            return Ok(request);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Recipe>> GetRecipeById(string id)
+        {
+            var request = await _recipeService.GetRecipeAsync(id);
+
+            return Ok(request);
         }
     }
 }

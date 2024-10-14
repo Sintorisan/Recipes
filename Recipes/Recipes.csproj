@@ -58,6 +58,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
+        <PackageReference Include="Blazorise" Version="1.6.1" />
+        <PackageReference Include="Blazorise.Bootstrap" Version="1.6.1" />
+        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.6.1" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
@@ -67,6 +71,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Recipes.Domain\Recipes.Domain.csproj" />
+      <ProjectReference Include="..\Recipes.Infrastructure\Recipes.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

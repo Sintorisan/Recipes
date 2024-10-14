@@ -1,0 +1,14 @@
+﻿<div>
+    <p>@Step.HowTo</p>
+    <ul>
+        @foreach (var item in Step.Ingredients)
+        {
+            <li>@item.Measurement.Value<b>@item.Measurement.Unit</b>@item.Name</li>
+        }
+    </ul>
+</div>
+
+@code {
+    [Parameter]
+    public Step Step { get; set; }
+}

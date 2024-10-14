@@ -1,0 +1,29 @@
+﻿@page "/recipes"
+
+@inject RecipeOverviewLogic logic
+
+<h2 class="header">Your Recipes</h2>
+
+@if(Recipes.Count == 0)
+{
+    <p>Loading...</p>
+}
+else
+{    
+    <ul>
+        @foreach (var recipe in Recipes)
+        {
+            <ListItemComponent Recipe="recipe"/>            
+        }
+    </ul>
+}
+
+@code {
+    public List<Recipe>? Recipes { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Recipes = await logic.GetAllRecipes();
+    }
+
+}

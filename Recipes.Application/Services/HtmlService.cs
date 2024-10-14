@@ -1,5 +1,5 @@
-﻿using Recipes.Application.Interfaces;
-using System.Text.RegularExpressions;
+﻿using HtmlAgilityPack;
+using Recipes.Application.Interfaces;
 
 namespace Recipes.Application.Services;
 
@@ -23,18 +23,20 @@ public class HtmlService : IHtmlService
 
     private static string ExtractBodyContent(string html)
     {
-        var jsonPattern = @"<body[^>]*>(.*?)<\/body>";
-        var match = Regex.Match(html, jsonPattern, RegexOptions.Singleline);
+        HtmlDocument doc = new HtmlDocument();
+        doc.LoadHtml(html);
 
-        if (match.Success)
-        {
-            var jsonContent = match.Groups[1].Value;
+        var tagsToRemove = new[] { "script", "style", "link", "meta", "header", "footer", "nav", "aside", "iframe", "embed", "form", "button", "input" };
 
-            return jsonContent.Trim();
-        }
-        else
+        foreach (var tag in tagsToRemove)
         {
-            throw new Exception("JSON content not found in the HTML response.");
+            foreach (var node in doc.DocumentNode.SelectNodes("//" + tag) ?? new HtmlNodeCollection(null))
+            {
+                node.Remove();
+            }
         }
+
+        var bodyContent = doc.DocumentNode.SelectSingleNode("//body").InnerHtml;
+        return bodyContent.Trim();
     }
 }

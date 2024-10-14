@@ -1,0 +1,47 @@
+﻿@page "/recipe/{id}"
+@inject RecipePageLogic logic
+@inject NavigationManager nav
+@using System.Text.Json
+
+<h3>Recipe</h3>
+<button class="btn btn-primary" @onclick="GoHome">Home</button>
+@if (Recipe != null)
+{    
+    <p>@Recipe.Id</p>
+    <p>@Recipe.Name</p>
+    <ul>
+        @foreach (var item in Recipe.AllIngredients)
+        {
+            <li>@item.Measurement.Value<b>@item.Measurement.Unit</b>@item.Name</li>
+        }
+    </ul>
+    @foreach (var step in Recipe.Steps)
+    {
+        <StepComponent Step="step" />
+    }
+
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    [Parameter]
+    public string id { get; set; } = string.Empty;
+    private Recipe? Recipe { get; set; }
+    private bool isSuccess;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Recipe = await logic.GetRecipe(id);
+
+        isSuccess = Recipe != null;
+    }
+
+    public void GoHome()
+    {
+        nav.NavigateTo("/");
+    }
+
+}

@@ -1,0 +1,67 @@
+﻿.screen {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container {
+    border-radius: 0.5em;
+    box-shadow: 7px 7px 13px #b197fc, -7px -7px 12px #f5f3ff;
+    position: relative;
+    width: 350px;
+    height: 50px;
+    z-index: 2;
+}
+
+.input-field {
+    background-color: whitesmoke;
+    border-radius: 0.5em;
+    border: 1px solid #ddd5ff;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    font-size: 16px;
+    display: none; /* Initially hidden */
+}
+
+    .input-field.show {
+        display: block; /* Reveals input */
+        padding-right: 50px; /* Makes room for the button */
+    }
+
+    .input-field:focus {
+        outline: none; /* Removes default focus outline */
+        border: none; /* Removes border */
+    }
+
+.button {
+    border-radius: 0.5em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ddd5ff;
+    color: #6c757d;
+    border: 1px solid #ddd5ff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+    .button.shrink {
+        border-radius: 0 0.5em 0.5em 0;
+        width: 50px;
+    }
+
+button:hover {
+    border: 1px solid white;
+}
+
+.recipe-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}

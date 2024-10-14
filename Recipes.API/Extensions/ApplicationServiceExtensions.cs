@@ -36,6 +36,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ISemanticKernelService, SemanticKernelService>();
         services.AddScoped<IRecipeRepository, RecipeRepository>();
         services.AddScoped<IHtmlService, HtmlService>();
+        services.AddScoped<IRecipeService, RecipeService>();
 
         return services;
     }

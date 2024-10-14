@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipes", "Recipes\Recipes.csproj", "{5402F7A6-1E4C-43C5-B7BC-916076007187}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recipes", "Recipes\Recipes.csproj", "{5402F7A6-1E4C-43C5-B7BC-916076007187}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipes.API", "Recipes.API\Recipes.API.csproj", "{C0DFEDB4-0206-4CA8-9266-6FFADBAA8A2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recipes.API", "Recipes.API\Recipes.API.csproj", "{C0DFEDB4-0206-4CA8-9266-6FFADBAA8A2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipes.Application", "Recipes.Application\Recipes.Application.csproj", "{26E16EC3-70B2-4D78-9C88-855751F9CBED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recipes.Application", "Recipes.Application\Recipes.Application.csproj", "{26E16EC3-70B2-4D78-9C88-855751F9CBED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipes.Domain", "Recipes.Domain\Recipes.Domain.csproj", "{B90E9931-8180-4AA5-8840-923AE5AD7AF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recipes.Domain", "Recipes.Domain\Recipes.Domain.csproj", "{B90E9931-8180-4AA5-8840-923AE5AD7AF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipes.Infrastructure", "Recipes.Infrastructure\Recipes.Infrastructure.csproj", "{0EFFB0E9-E47B-4D2C-ABFD-9C569D9F95FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recipes.Infrastructure", "Recipes.Infrastructure\Recipes.Infrastructure.csproj", "{0EFFB0E9-E47B-4D2C-ABFD-9C569D9F95FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

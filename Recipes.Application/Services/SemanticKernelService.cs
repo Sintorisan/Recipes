@@ -4,9 +4,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 using Recipes.Application.Interfaces;
-using Recipes.Domain.Entities;
 using Recipes.Infrastructure.Interfaces;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace RecipeStorage.Application.Services;
@@ -37,18 +35,14 @@ public class SemanticKernelService : ISemanticKernelService
         _history.AddAssistantMessage(InitialPrompt);
     }
 
-    public async Task<Recipe> CreateRecipe(string urlScrape)
+    public async Task<string> CreateRecipeJson(string urlScrape)
     {
         _history.AddUserMessage(urlScrape);
         var result = await GetAnswer();
 
         var jsonRecipe = ConvertToJsonObject(result);
 
-        var recipe = MapNewRecipe(jsonRecipe);
-
-        await _recipeRepository.AddToDatabaseAsync(recipe);
-
-        return recipe;
+        return jsonRecipe;
     }
 
     private async Task<string> GetAnswer()
@@ -70,7 +64,6 @@ public class SemanticKernelService : ISemanticKernelService
         {
             var jsonContent = match.Groups[1].Value;
 
-            jsonContent = Regex.Replace(jsonContent, @"//.*", "");
             jsonContent = jsonContent.Trim();
 
             return jsonContent;
@@ -78,24 +71,6 @@ public class SemanticKernelService : ISemanticKernelService
         else
         {
             throw new Exception("JSON content not found in the response.");
-        }
-    }
-
-    private Recipe MapNewRecipe(string recipe)
-    {
-        try
-        {
-            var mappedRecipe = JsonSerializer.Deserialize<Recipe>(recipe, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
-
-            return mappedRecipe ?? new Recipe();
-        }
-        catch (JsonException ex)
-        {
-            Console.WriteLine($"Error deserializing recipe: {ex.Message}");
-            return new Recipe();
         }
     }
 }

@@ -1,0 +1,40 @@
+﻿.nav-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    z-index: 10; /* Ensures navbar stays on top */
+    height: 100px; /* Match the height you need for the NavBar */
+}
+
+.button-container {
+    display: flex;
+    background-color: #ddd5ff;
+    color: white;
+    border: 1px solid #ddd5ff;
+    box-shadow: 7px 7px 13px #b197fc, -7px -7px 12px #f5f3ff;
+    width: 350px;
+    height: 40px;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+}
+
+.button {
+    outline: 0 !important;
+    border: 0 !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+}

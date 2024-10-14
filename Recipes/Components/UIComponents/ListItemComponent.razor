@@ -1,0 +1,61 @@
+﻿@inject NavigationManager nav
+
+@if(Recipe != null)
+{    
+<li @onclick="ToggleExpand" class="toggle-item">
+    <div class="toggle-content @(isExpanded ? "expanded" : "collapsed")" style="background-image:url(@Recipe.ImageUrl)">
+        @if (isExpanded)
+        {
+            <div class="expanded-content">
+                <small class="badge">@Recipe.MealTag</small>
+                <div class="description">
+                    <div class="title">
+                        <p class="title">
+                            <strong>@Recipe.Name</strong>
+                            @Recipe.Description
+                        </p>
+                    </div>
+                    <p class="card-footer">
+                        @TotalTime(Recipe.TotalTime);
+                    </p>
+                    <button @onclick="() => GoToRecipe(Recipe.Id)">To Recipe</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <small class="badge">@Recipe.MealTag</small>
+            <strong>@Recipe.Name</strong>
+        }
+    </div>
+</li>
+}
+
+@code {
+    [Parameter]
+    public Recipe? Recipe { get; set; }
+
+    private bool isExpanded = false;
+
+    private void ToggleExpand()
+    {
+        isExpanded = !isExpanded;
+    }
+
+    public void GoToRecipe(Guid id)
+    {
+        nav.NavigateTo($"/recipe/{id}");
+    }
+
+    public string TotalTime(int time)
+    {
+        if(time > 59)
+        {
+            int hours = time / 60;
+            int minutes = time % 60;
+
+            return $"{hours}:{minutes:D2}";   
+        }
+        return $"{time} minutes";
+    }
+}

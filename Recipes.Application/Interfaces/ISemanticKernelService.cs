@@ -1,8 +1,6 @@
-﻿using Recipes.Domain.Entities;
-
-namespace Recipes.Application.Interfaces;
+﻿namespace Recipes.Application.Interfaces;
 
 public interface ISemanticKernelService
 {
-    Task<Recipe> CreateRecipe(string urlScrape);
+    Task<string> CreateRecipeJson(string urlScrape);
 }

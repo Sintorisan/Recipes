@@ -1,0 +1,44 @@
+﻿@page "/"
+
+@inject AddRecipeLogic logic
+@inject NavigationManager nav
+
+<div class="screen">
+    <div class="recipe-container">
+        <div class="button-container">
+            <input type="text" class="input-field @(isExpanded ? "show" : "")"
+                   placeholder="Url to the recipe..." @bind="Url" />
+            <button class="button @(isExpanded ? "shrink" : "")"
+                    @onclick="ButtonClickHandler">
+                @(isExpanded ? "+" : "Add Recipe")
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool isExpanded = false;
+    public string Url { get; set; } = string.Empty;
+
+    private async Task ButtonClickHandler()
+    {
+        if (!isExpanded)
+        {
+            // First click: expand the input field
+            isExpanded = true;
+        }
+        else
+        {
+            // Second click: trigger recipe creation
+            await CreateRecipe();
+        }
+    }
+
+    private async Task CreateRecipe()
+    {
+        await logic.CreateRecipe(Url);
+        // Reset state after recipe creation
+        isExpanded = false;
+        Url = string.Empty;
+    }
+}

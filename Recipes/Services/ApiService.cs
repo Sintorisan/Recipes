@@ -1,34 +1,46 @@
 ﻿using Recipes.Domain.Entities;
 using System.Net.Http.Json;
 
-namespace Recipes.Services
+namespace Recipes.Services;
+
+public class ApiService
 {
-    public class ApiService
+    private readonly HttpClient _httpClient;
+
+    public ApiService(HttpClient httpClient)
     {
-        private readonly HttpClient _httpClient;
+        _httpClient = httpClient;
+    }
 
-        public ApiService(HttpClient httpClient)
+    public async Task<Recipe?> CreateRecipeAsync(string url)
+    {
+        try
         {
-            _httpClient = httpClient;
-        }
+            var response = await _httpClient.PostAsJsonAsync("api/recipe", url);
+            response.EnsureSuccessStatusCode();
 
-        public async Task<Recipe?> AddRecipeAsync(string url)
+            var recipe = await response.Content.ReadFromJsonAsync<Recipe>();
+
+            return recipe;
+        }
+        catch (HttpRequestException ex)
         {
-            try
-            {
-                // Send the POST request
-                var response = await _httpClient.PostAsJsonAsync("api/recipe", url);
-                response.EnsureSuccessStatusCode();
-
-                // Deserialize and return the recipe
-                return await response.Content.ReadFromJsonAsync<Recipe>();
-            }
-            catch (HttpRequestException ex)
-            {
-                // Handle the HTTP request error (e.g., logging)
-                Console.WriteLine($"Error fetching recipe: {ex.Message}");
-                return null;
-            }
+            Console.WriteLine($"Error fetching recipe: {ex.Message}");
+            return null;
         }
+    }
+
+    public async Task<Recipe?> GetRecipe(string id)
+    {
+        var recipe = await _httpClient.GetFromJsonAsync<Recipe>($"api/recipe/{id}");
+
+        return recipe;
+    }
+
+    public async Task<List<Recipe>?> GetAllRecipes()
+    {
+        var recipes = await _httpClient.GetFromJsonAsync<List<Recipe>>("api/recipe/");
+
+        return recipes;
     }
 }

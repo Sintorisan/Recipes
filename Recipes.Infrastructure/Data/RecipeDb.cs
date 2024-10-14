@@ -9,5 +9,11 @@ public class RecipeDb : DbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Ingredient>().OwnsOne(i => i.Measurement);
+    }
+
     public DbSet<Recipe> Recipes { get; set; }
+    public DbSet<Ingredient> Ingredients { get; set; }
 }

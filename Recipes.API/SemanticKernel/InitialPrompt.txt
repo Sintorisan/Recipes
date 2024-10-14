@@ -1,114 +1,61 @@
-﻿- **Extract the following information from the HTML body of a recipe:**
-  - **name**: The name of the recipe.
-  - **time**: An object containing:
-    - **prep**: The preparation time.
-    - **cook**: The cooking time.
-    - **total**: The total time required.
-  - **steps**: An array of objects for each step with:
-    - **how_to**: The instructions for that step.
-    - **time**: The time required for that step.
-    - **ingredients**: An array of objects for each ingredient used in that step, containing:
-      - **item**: The ingredient's name.
-      - **measurement**: An object with:
-        - **value**: The quantity of the ingredient.
-        - **unit**: The unit of measurement (e.g., PORTION, STYCK, MSK, DL, G, KRM).
+﻿**Task**: Extract the following structured information from the HTML body of a recipe page. If any information is missing,
+use null or an empty array where appropriate.
+
+- **name**: Extract the main title or name of the recipe.
+- **img_url**: Extract the URL of the image representing the meal, ideally the primary or largest image on the page
+- **servings**: Identify and extract the number of servings the recipe yields as an integer.
+- **tags**: Gather an array of relevant tags for the recipe (e.g., ["Vegetarian", "Indian"]).
+- **meal_tag**: The primary dietary category the recipe belongs to (e.g., "Vegetarian", "Meat", "Fish").
+- **description**: A concise description of the recipe, limited to 20 words.
+- **total_time**: Extract the total preparation and cooking time required for the recipe in minutes as an integer.
+- **steps**: Extract each instruction step from the recipe in an array of objects. **If the recipe does not provide explicit steps, create them based on the recipe content and assign ingredients to each step accordingly.** Each step object should include:
+  - **how_to**: The instructions for that specific step.
+  - **ingredients**: An array of objects for each ingredient used in that step, containing:
+    - **name**: The ingredient's name only; omit any brand name.
+    - **measurement**: An object containing:
+      - **value**: The numeric amount or quantity of the ingredient adjusted for one serving.
+      - **unit**: The unit of measurement (e.g., "g", "kg", "krm", "tsk", "msk", "ml", "l", "stk", "portion").
+
+
 
 - **Output Format:**
 
 ```json
 {
   "name": "Palak Paneer med Tomat och Halloumi",
-  "time": {
-    "prep": "20 min",
-    "cook": "30 min",
-    "total": "50 min"
-  },
+  "img_url": "https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/imagevaultfiles/id_159450/cf_259/palak_paneer_med_tomat_och_halloumi.jpg",
+  "servings": 4,
+  "tags": ["Vegetarian", "Indian"],
+  "meal_tag": "Vegetarian",
+  "description": "En klassisk indisk rätt med mild, krämig spenatsås, halloumi, garam masala, vitlök, ingefära, tomater, serveras med fluffigt ris.",
+  "total_time": "Under 30 min",
   "steps": [
     {
       "how_to": "Koka riset enligt anvisningen på förpackningen.",
-      "time": "20 min",
       "ingredients": [
         {
-          "item": "Ris eller havreris",
+          "name": "Ris",
           "measurement": {
-            "value": 4,
-            "unit": "PORTION"
+            "value": 1,
+            "unit": "portion"
           }
         }
       ]
     },
     {
       "how_to": "Fräs lök, vitlök, ingefära, tomatpuré och garam masala i olivolja.",
-      "time": "10 min",
       "ingredients": [
         {
-          "item": "Gul lök eller schalottenlök",
+          "name": "Schalottenlök",
           "measurement": {
-            "value": 1,
-            "unit": "STYCK"
-          }
-        },
-        {
-          "item": "Vitlöksklyftor",
-          "measurement": {
-            "value": 2,
-            "unit": "STYCK"
+            "value": 0.25,
+            "unit": "stk"
           }
         }
-      ]
-    },
-    {
-      "how_to": "Tillsätt tomater, krossade tomater, vatten, grädde och buljongtärning. Låt sjuda.",
-      "time": "10 min",
-      "ingredients": [
-        {
-          "item": "Tomater",
-          "measurement": {
-            "value": 2,
-            "unit": "STYCK"
-          }
-        },
-        {
-          "item": "Krossade tomater",
-          "measurement": {
-            "value": 390,
-            "unit": "G"
-          }
-        }
-      ]
-    },
-    {
-      "how_to": "Vänd ner spenaten.",
-      "time": "5 min",
-      "ingredients": [
-        {
-          "item": "Färsk spenat",
-          "measurement": {
-            "value": 200,
-            "unit": "G"
-          }
-        }
-      ]
-    },
-    {
-      "how_to": "Stek halloumi och blanda ner i grytan. Smaka av med salt.",
-      "time": "5 min",
-      "ingredients": [
-        {
-          "item": "Halloumi eller grillost",
-          "measurement": {
-            "value": 400,
-            "unit": "G"
-          }
-        },
-        {
-          "item": "Salt",
-          "measurement": {
-            "value": 2,
-            "unit": "KRM"
-          }
-        }
+        // Additional ingredients as per the step...
       ]
     }
+    // Additional steps as per the recipe page...
   ]
 }
+

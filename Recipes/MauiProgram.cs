@@ -1,5 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Blazored.LocalStorage;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
+using Microsoft.Extensions.Logging;
 using Recipes.Components.Pages;
+using Recipes.Components.UIComponents;
 using Recipes.Services;
 
 namespace Recipes
@@ -17,15 +22,21 @@ namespace Recipes
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddBlazoredLocalStorage();
 
-            // Register HttpClient for ApiService with BaseAddress
+            builder.Services
+                .AddBlazorise()
+                .AddBootstrapProviders()
+                .AddFontAwesomeIcons();
+
             builder.Services.AddHttpClient<ApiService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:5172/");
             });
 
-            // Register HomeLogic
-            builder.Services.AddScoped<HomeLogic>();
+            builder.Services.AddScoped<AddRecipeLogic>();
+            builder.Services.AddScoped<RecipeOverviewLogic>();
+            builder.Services.AddScoped<RecipePageLogic>();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
