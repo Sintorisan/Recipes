@@ -1,11 +1,9 @@
-﻿* {
-    padding: 0;
-    margin: 0;
-}
-
+﻿
 html, body {    
     background-color: #ddd5ff;
-
+    display: flex;
+    align-content:center;
+    justify-content:center;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding: 0, 0, 0, 0;
     margin: 0, 0, 0, 0;

@@ -1,0 +1,31 @@
+﻿
+<ul>
+    @foreach (var item in Ingredients)
+    {
+        <li>
+            <div class="li">
+                <span>
+                <b>@item.Measurement.Value</b>
+                @item.Measurement.Unit
+                @item.Name
+                </span>
+                <button id="check" class="button @(item.IsInCart ? "in-cart" : "")" @onclick="() => AddToList(item)"></button>
+            <br />
+            </div>
+        </li>
+    }
+    </ul>
+
+@code {
+    [Parameter]
+    public List<Ingredient> Ingredients { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+    }
+
+    void AddToList(Ingredient ingredient)
+    {
+        ingredient.IsInCart = ingredient.IsInCart ? false : true;
+    }
+}

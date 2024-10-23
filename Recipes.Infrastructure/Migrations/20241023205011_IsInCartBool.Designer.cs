@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipes.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Recipes.Infrastructure.Data;
 namespace Recipes.Infrastructure.Migrations
 {
     [DbContext(typeof(RecipeDb))]
-    partial class RecipeDbModelSnapshot : ModelSnapshot
+    [Migration("20241023205011_IsInCartBool")]
+    partial class IsInCartBool
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

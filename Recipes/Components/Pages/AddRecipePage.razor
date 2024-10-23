@@ -24,12 +24,10 @@
     {
         if (!isExpanded)
         {
-            // First click: expand the input field
             isExpanded = true;
         }
         else
         {
-            // Second click: trigger recipe creation
             await CreateRecipe();
         }
     }
@@ -37,7 +35,6 @@
     private async Task CreateRecipe()
     {
         await logic.CreateRecipe(Url);
-        // Reset state after recipe creation
         isExpanded = false;
         Url = string.Empty;
     }

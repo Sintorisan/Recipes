@@ -47,15 +47,15 @@
         nav.NavigateTo($"/recipe/{id}");
     }
 
-    public string TotalTime(int time)
+    public string TotalTime(int totalMinutes)
     {
-        if(time > 59)
+        if (totalMinutes > 59)
         {
-            int hours = time / 60;
-            int minutes = time % 60;
+            int hours = totalMinutes / 60;
+            int minutes = totalMinutes % 60;
 
-            return $"{hours}:{minutes:D2}";   
+            return $"{hours} hours : {minutes:D2} minutes";   
         }
-        return $"{time} minutes";
+        return $"{totalMinutes} minutes";
     }
 }

@@ -9,6 +9,8 @@ public class Ingredient
     [JsonPropertyName("name")]
     public string Name { get; set; } = string.Empty;
 
+    public bool IsInCart { get; set; }
+
     [JsonPropertyName("measurement")]
     public Measurement? Measurement { get; set; }
 

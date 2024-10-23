@@ -3,23 +3,30 @@
 @inject NavigationManager nav
 @using System.Text.Json
 
-<h3>Recipe</h3>
-<button class="btn btn-primary" @onclick="GoHome">Home</button>
 @if (Recipe != null)
 {    
-    <p>@Recipe.Id</p>
-    <p>@Recipe.Name</p>
-    <ul>
-        @foreach (var item in Recipe.AllIngredients)
-        {
-            <li>@item.Measurement.Value<b>@item.Measurement.Unit</b>@item.Name</li>
-        }
-    </ul>
-    @foreach (var step in Recipe.Steps)
-    {
-        <StepComponent Step="step" />
-    }
+    <div class="page-container">
+        <div class="recipe-img" style="background-image: url(https://images.recept.se/images/recipes/renskavsgryta-med-mos_18645.jpg?fit=crop&crop=focalpoint&auto=format&fp-x=0.45629912904388&fp-y=0.5&fp-z=1&w=600&h=600)">
+            <h3>@Recipe.Name</h3>
+        </div>
+        <div class="toggle-button">
+             <div class="slider">
+                <button class="slider-button @(displayIngredients ? "activate" : "")" @onclick="ToggleButton">Ingredients</button>
+                <button class="slider-button @(!displayIngredients ? "activate" : "")" @onclick="ToggleButton">How To</button>
+            </div>
+        </div>
+        <div class="context-container">
 
+            @if (displayIngredients)
+            {
+                <DisplayIngredientsComponent Ingredients="Ingredients" />
+            }
+            else
+            {
+                <DisplayHowToComponent Steps="Steps"/>
+            }
+        </div>
+    </div>
 }
 else
 {
@@ -29,14 +36,25 @@ else
 @code {
     [Parameter]
     public string id { get; set; } = string.Empty;
+
     private Recipe? Recipe { get; set; }
-    private bool isSuccess;
+    private List<Ingredient> Ingredients = new();
+    private List<Step> Steps = new();
+
+    private bool displayIngredients = true;
+
+    // @(displayIngredients? "left" : "right")
 
     protected override async Task OnInitializedAsync()
     {
         Recipe = await logic.GetRecipe(id);
+        Ingredients = Recipe.AllIngredients;
+        Steps = Recipe.Steps;
+    }
 
-        isSuccess = Recipe != null;
+    void ToggleButton()
+    {
+        displayIngredients = displayIngredients ? false : true;
     }
 
     public void GoHome()

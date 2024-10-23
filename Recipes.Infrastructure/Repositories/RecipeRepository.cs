@@ -56,12 +56,6 @@ public class RecipeRepository : IRecipeRepository
         return await _context.Ingredients.AnyAsync(i => i.Name == name);
     }
 
-    public async Task AddIngredientsAsync(Ingredient ingredient)
-    {
-        _context.Ingredients.Add(ingredient);
-        await _context.SaveChangesAsync();
-    }
-
     public async Task CreateNewIngredient(Ingredient ingredient)
     {
         var newIngredient = new Ingredient()
@@ -71,6 +65,7 @@ public class RecipeRepository : IRecipeRepository
             Measurement = null
         };
 
-        await AddIngredientsAsync(newIngredient);
+        _context.Ingredients.Add(ingredient);
+        await _context.SaveChangesAsync();
     }
 }
